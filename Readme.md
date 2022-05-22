@@ -100,3 +100,12 @@ Productcontroller => pom.xml => add spring boot data jpa starter dependencies
 add h2 or mysql up to you
 
 D:\AA Backup\Video\Spring Boot Microservices, CQRS, SAGA, Axon Framework\[TutsNode.com] - Spring Boot Microservices, CQRS, SAGA, Axon Framework\7. CQRS Pattern. Products Microservice
+
+
+V + N + Command
+CreateProductCommand
+
+N + PerformedAction + Event
+ProductCreatedEvent
+
+D:\AA Backup\Video\Spring Boot Microservices, CQRS, SAGA, Axon Framework\[TutsNode.com] - Spring Boot Microservices, CQRS, SAGA, Axon Framework\8. CQRS. Persisting Event in the Products database
