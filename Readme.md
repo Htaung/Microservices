@@ -109,3 +109,15 @@ N + PerformedAction + Event
 ProductCreatedEvent
 
 D:\AA Backup\Video\Spring Boot Microservices, CQRS, SAGA, Axon Framework\[TutsNode.com] - Spring Boot Microservices, CQRS, SAGA, Axon Framework\8. CQRS. Persisting Event in the Products database
+
+
+
+
+Stop at here 6-May-2022
+D:\AA Backup\Video\Spring Boot Microservices, CQRS, SAGA, Axon Framework\[TutsNode.com] - Spring Boot Microservices, CQRS, SAGA, Axon Framework\9. CQRS. Querying Data
+
+
+1st start axon server
+2nd edureka discovery 
+3rd product service
+4th Api Gateway
