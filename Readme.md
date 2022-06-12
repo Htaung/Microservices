@@ -121,3 +121,21 @@ D:\AA Backup\Video\Spring Boot Microservices, CQRS, SAGA, Axon Framework\[TutsNo
 2nd edureka discovery 
 3rd product service
 4th Api Gateway
+
+
+Core package share between query and command api
+
+
+Query class start with Find+XXX+Query
+
+
+Request => Java Bean => Java Bean Validation =>  Controller => Command Gateway --> Dispatch => Command Bus <= Command Handler --> Dispatch => Event Bus <= Event Handler
+
+Command Handler validation => 
+
+Message dispatch interceptor => when a command is dispatched on command bus
+=> intercept between Command gatewaty and command bus => can do additional logging, validation
+
+
+Stop at here 12-June-2022
+D:\AA Backup\Video\Spring Boot Microservices, CQRS, SAGA, Axon Framework\[TutsNode.com] - Spring Boot Microservices, CQRS, SAGA, Axon Framework\12. Validation. Message Dispatch Interceptor
