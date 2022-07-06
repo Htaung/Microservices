@@ -139,3 +139,13 @@ Message dispatch interceptor => when a command is dispatched on command bus
 
 Stop at here 12-June-2022
 D:\AA Backup\Video\Spring Boot Microservices, CQRS, SAGA, Axon Framework\[TutsNode.com] - Spring Boot Microservices, CQRS, SAGA, Axon Framework\12. Validation. Message Dispatch Interceptor
+
+
+interceptor need to register in spring config
+
+if added interceptor in interceptor throw exception it will not go to commandhandler Aggregate class 
+
+
+Stop at here 6-July-2022
+D:\AA Backup\Video\Spring Boot Microservices, CQRS, SAGA, Axon Framework\[TutsNode.com] - Spring Boot Microservices, CQRS, SAGA, Axon Framework\13. Validation. How to check if record exists
+Set based Constitency validation
