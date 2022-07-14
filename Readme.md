@@ -149,3 +149,35 @@ if added interceptor in interceptor throw exception it will not go to commandhan
 Stop at here 6-July-2022
 D:\AA Backup\Video\Spring Boot Microservices, CQRS, SAGA, Axon Framework\[TutsNode.com] - Spring Boot Microservices, CQRS, SAGA, Axon Framework\13. Validation. How to check if record exists
 Set based Constitency validation
+
+how to check if product is existing product
+when creating new product client api first assist an event in event store and only after the event is persisted
+and it will publish an event to synchronized data between the event store and query the database
+communication bet command and query api is done via event messaging
+
+sync bet two models might take sometimes because of event messaging
+
+command api quickly check if record already exists before persisted in event store
+
+Solution to this problem is
+Axon framework set based constituency validation
+
+
+Command model can contain any form of data model, introduce a small lookup table which contain productId and title
+when the prouct create, command api will first lookup in lookup table
+lookup table should not contain exact same product as in database
+lookup table only store product fields that are need to look up table and see if exists (eg. id and title)
+
+how to query look up table before command handler process command
+
+message dispatcher will intercept the command before it is processed by command handler method
+if exist in lookup table then command will be blocked
+
+Creating product lookup table should be in separate datbase for testing purpose it can be in same databaase
+
+@ProcessingGroup("product-group") in event Handler axon will create separate tracking event processor, use special tracking token
+same event and different thread and node 
+
+
+14 July-2022 stop at here
+D:\AA Backup\Video\Spring Boot Microservices, CQRS, SAGA, Axon Framework\[TutsNode.com] - Spring Boot Microservices, CQRS, SAGA, Axon Framework\14. Handle Error & Rollback Transaction
