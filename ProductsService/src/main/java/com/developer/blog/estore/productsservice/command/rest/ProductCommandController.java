@@ -31,11 +31,15 @@ public class ProductCommandController {
                 .productId(UUID.randomUUID().toString())
                 .build();
         String returnValue = "";
-        try {
+
+	    returnValue = commandGateway.sendAndWait(createProductCommand);
+
+        /*
+	    try {
             returnValue = commandGateway.sendAndWait(createProductCommand);
         }catch (Exception e){
             returnValue = e.getLocalizedMessage();
-        }
+        }*/
 
         System.out.println("return value: " + returnValue);
         return returnValue;

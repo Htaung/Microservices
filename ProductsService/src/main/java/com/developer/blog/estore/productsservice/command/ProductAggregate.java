@@ -23,7 +23,7 @@ public class ProductAggregate {
     }
 
     @CommandHandler
-    public ProductAggregate(CreateProductCommand createProductCommand){
+    public ProductAggregate(CreateProductCommand createProductCommand) throws Exception {
         //Validate Create Product command
         if(createProductCommand.getPrice().compareTo(BigDecimal.ZERO) <= 0){
             throw new IllegalArgumentException("Price cannot be less than or equal to zero");
@@ -37,6 +37,17 @@ public class ProductAggregate {
         BeanUtils.copyProperties(createProductCommand, productCreatedEvent);
 
         AggregateLifecycle.apply(productCreatedEvent);
+
+	    /** product created event will not be persisted in event store
+	     * axon framework doesn't persist immediately
+	     * txn will be roll back and none of event will be persisted
+	     * axon framework will rob this error into command execution exception into query execution exception
+	     * page for error handling is decicated handler execution exception become clear in distributed app environment
+	     * eg. app for dealing with command and other app is dealing with query side do app segregation
+	     * we loose certainly that both app can access the same process and to support and encourage this
+	     * axon will generally find any exception which is a result of command or query handling
+	     */
+	    if(true) throw new Exception("An error took place in CreateProductCommand @CommandHandler");
     }
 
     @EventSourcingHandler

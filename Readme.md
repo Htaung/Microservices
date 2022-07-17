@@ -181,3 +181,42 @@ same event and different thread and node
 
 14 July-2022 stop at here
 D:\AA Backup\Video\Spring Boot Microservices, CQRS, SAGA, Axon Framework\[TutsNode.com] - Spring Boot Microservices, CQRS, SAGA, Axon Framework\14. Handle Error & Rollback Transaction
+
+When exceptions are thrown in event, default behavior is to look for an error msg and continue the execution
+coz code and command handler was successfully executed => app will recieved a successful response 
+
+If an exception is thrown and was not handled in event handler method -> it will not prevent all event handlers from execution
+But execution will continue and the code in other method in same process and group will continue
+
+exception msg will be thrown in event handler method will also not be handled by try catch in controller class or in 
+centralized controller advice exception handler class.
+
+If you want exception msg to propagate all the way to a controller method or to a controller advice class 
+need to write additional code to configure the event processor to propagate the exception so you can catch in differenct place 
+To do that we will use listener invocation class handler provied by axon framework
+If doing this execution in other event handler method handle an error in controller class and return a custom error msg
+txn will roll back 
+For this to work => need to configure our event and method to be in same processing group that is configured to use subscribing event processor.
+Event processor is component that is incharge of managing technical aspect of providing the event handler 
+
+Event processor have 2 forms
+Tracking event procesor 
+Pull their msg from a source using a thread it managed itself. A different thread
+Will retry processing the event using incremental back-off period 
+processor will go into error mode, will release the token and retry an event as an incremental interval starting at one second 
+will double after each attempt and to a maximum wait time of 60 seconds per attempt is achieved
+this back-off time ensures that if another node is able to process event successfully, it will have opportunity to claim the token 
+requried to process the event
+
+    
+Subscribing event processor 
+Subscribing themselves to source of events and are invoked by thread managed by publishing mechanism. Same Thread
+By default exception raised by event handlers are locked and processing will continue next event
+will report the publication error to the component that provided an event
+will have an exception bubbled up to the publishing component of event allowing to deal with it accordingly
+
+If we propagate the exception all the way up, we can make entire txn will roll back
+we will use subscribing event processor to manage event handler in product event handler class
+
+17 july 2022 stop
+D:\AA Backup\Video\Spring Boot Microservices, CQRS, SAGA, Axon Framework\[TutsNode.com] - Spring Boot Microservices, CQRS, SAGA, Axon Framework\14. Handle Error & Rollback Transaction\6. Trying to handle the @CommandExecutionException
