@@ -23,7 +23,7 @@ public class ProductAggregate {
     }
 
     @CommandHandler
-    public ProductAggregate(CreateProductCommand createProductCommand) throws Exception {
+    public ProductAggregate(CreateProductCommand createProductCommand){
         //Validate Create Product command
         if(createProductCommand.getPrice().compareTo(BigDecimal.ZERO) <= 0){
             throw new IllegalArgumentException("Price cannot be less than or equal to zero");
@@ -47,7 +47,7 @@ public class ProductAggregate {
 	     * we loose certainly that both app can access the same process and to support and encourage this
 	     * axon will generally find any exception which is a result of command or query handling
 	     */
-	    if(true) throw new Exception("An error took place in CreateProductCommand @CommandHandler");
+	    //if(true) throw new Exception("An error took place in CreateProductCommand @CommandHandler");
     }
 
     @EventSourcingHandler

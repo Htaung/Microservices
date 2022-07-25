@@ -220,3 +220,25 @@ we will use subscribing event processor to manage event handler in product event
 
 17 july 2022 stop
 D:\AA Backup\Video\Spring Boot Microservices, CQRS, SAGA, Axon Framework\[TutsNode.com] - Spring Boot Microservices, CQRS, SAGA, Axon Framework\14. Handle Error & Rollback Transaction\6. Trying to handle the @CommandExecutionException
+
+
+import org.axonframework.messaging.interceptors.ExceptionHandler;
+
+handle exception that are thrown from event handling functions in the same class
+
+To do rollback and undo db changes made by event handler method
+if processing group is configured to use subscribing event processor when using try catch event processor boz
+event handler method is use subscribing event processor , these events are processed in same thread and processing events
+in same thread gives this posibility to roll back the whole txn. 
+if exception happen default behavior is to handle exception and continue execution.
+
+one way is to use create own exception that catch exception thrown in event and methods
+Create events exceptio handler and implement Listener invocation of axon (ListenerInvocationErrorHandler)
+this will be last rethrow to make txn roll back (propagating error handler)
+
+register listerinvocation 
+
+25 july 2022
+D:\AA Backup\Video\Spring Boot Microservices, CQRS, SAGA, Axon Framework\[TutsNode.com] - Spring Boot Microservices, CQRS, SAGA, Axon Framework\14. Handle Error & Rollback Transaction
+
+10. Trying how transaction rollback works
