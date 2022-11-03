@@ -21,13 +21,13 @@ public class ProductServiceErrorHandler {
 	@ExceptionHandler(value = {CommandExecutionException.class})
 	public ResponseEntity<Object> handleCommandExecutionException(CommandExecutionException ex, WebRequest webRequest){
 		ErrorMessage errorMessage = new ErrorMessage(new Date(), ex.getMessage());
-		return new ResponseEntity<>(ex.getMessage(), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@ExceptionHandler(value = {Exception.class})
 	public ResponseEntity<Object> handleOtherException(Exception ex, WebRequest webRequest){
 		ErrorMessage errorMessage = new ErrorMessage(new Date(), ex.getMessage());
-		return new ResponseEntity<>(ex.getMessage(), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 
